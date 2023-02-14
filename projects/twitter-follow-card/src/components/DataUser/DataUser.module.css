@@ -1,0 +1,22 @@
+.tw-user{
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tw-user-name{
+  font-weight: 700;
+  color:rgb(231, 233, 234);
+}
+
+.tw-user-username{
+  font-weight: 400;
+  color:rgb(113, 118, 123);
+}
+
+.is-following{
+  width: 7.7rem;
+  
+}

@@ -1,0 +1,11 @@
+.counters-wrapper{
+  padding-block: .5rem;
+}
+
+.counters span{
+  font-size: 15px;
+}
+
+.number-counter{
+  font-weight: 700;
+}

@@ -1,0 +1,12 @@
+.img{
+  width: 3rem;
+  aspect-ratio: 1/1;
+  border-radius: 2rem;
+  border: 0 solid black;
+  box-sizing: border-box;
+  box-shadow: rgb(255 255 255 / 3%) 0px 0px 2px inset
+}
+
+.lg {
+  width: 4rem;
+}
