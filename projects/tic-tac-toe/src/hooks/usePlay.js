@@ -1,17 +1,18 @@
-import { useState } from 'react'
-import { getPlayStorage, resetPlayStorage, savePlayStorage } from '../logic/storage'
+import { useContext } from 'react'
+import { PlayContext } from '../contexts/play'
+import { resetPlayStorage, savePlayStorage } from '../logic/storage'
 
 export function usePlay () {
-  const [play, setPLay] = useState(() => getPlayStorage() || false)
+  const { play, setPlay } = useContext(PlayContext)
 
   const startPlay = () => {
     savePlayStorage()
-    setPLay(true)
+    setPlay(true)
   }
 
   const restartPlay = () => {
     resetPlayStorage()
-    setPLay(false)
+    setPlay(false)
   }
 
   return { play, startPlay, restartPlay }

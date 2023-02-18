@@ -11,7 +11,7 @@ export default function Game ({ board, updateBoard }) {
               <Square
                 key={index}
                 index={index}
-                updateBoard={updateBoard}
+                onClick={updateBoard}
               >
                 {square}
               </Square>

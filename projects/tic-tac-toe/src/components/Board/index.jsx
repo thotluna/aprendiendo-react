@@ -10,8 +10,10 @@ import Game from '../Game'
 import Button from '../Button/index.jsx'
 
 import styles from './Board.module.css'
+import { usePlay } from '../../hooks/usePlay'
 
 export default function Board () {
+  const { restartPlay } = usePlay()
   const [board, setBoard] = useState(() => {
     const boardFromStorage = window.localStorage.getItem('board')
     if (boardFromStorage) return JSON.parse(boardFromStorage)
@@ -30,6 +32,7 @@ export default function Board () {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+    restartPlay()
 
     resetGameStorage()
   }
