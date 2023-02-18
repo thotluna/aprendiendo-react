@@ -1,9 +1,9 @@
 import classnames from 'classnames'
 import styles from './Square.module.css'
 
-export const Square = ({ children, isSelected, updateBoard, index, min = false }) => {
+export const Square = ({ children, isSelected, onClick, index, min = false }) => {
   const handleClick = () => {
-    updateBoard(index)
+    onClick(index)
   }
 
   return (
