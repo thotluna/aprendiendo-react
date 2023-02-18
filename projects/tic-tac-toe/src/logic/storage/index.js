@@ -8,3 +8,15 @@ export const resetGameStorage = () => {
   window.localStorage.removeItem('board')
   window.localStorage.removeItem('turn')
 }
+
+export const savePlayStorage = () => {
+  window.localStorage.setItem('play', true)
+}
+
+export const getPlayStorage = () => {
+  return window.localStorage.getItem('play')
+}
+
+export const resetPlayStorage = () => {
+  window.localStorage.removeItem('play')
+}
