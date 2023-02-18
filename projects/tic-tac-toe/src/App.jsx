@@ -15,7 +15,7 @@ function App () {
           setPlay={startPlay}
                  />
       }
-      {play && <Board />}
+      {play && <Board players={players} />}
     </>
   )
 }

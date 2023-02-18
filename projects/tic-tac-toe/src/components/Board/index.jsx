@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Children, useEffect, useState } from 'react'
 import confetti from 'canvas-confetti'
 
 import { TURNS } from '../../constants'
@@ -11,8 +11,9 @@ import Button from '../Button/index.jsx'
 
 import styles from './Board.module.css'
 import { usePlay } from '../../hooks/usePlay'
+import Footer from '../Footer'
 
-export default function Board () {
+export default function Board ({ players }) {
   const { restartPlay } = usePlay()
   const [board, setBoard] = useState(() => {
     const boardFromStorage = window.localStorage.getItem('board')
@@ -37,30 +38,43 @@ export default function Board () {
     resetGameStorage()
   }
 
+  const playComputer = () => {
+    let index
+    do {
+      index = Math.trunc(Math.random() * board.length)
+    } while (board[index] !== null)
+
+    updateBoard(index)
+  }
+
+  useEffect(() => {
+    if (!players.includes(turn) && winner === null) {
+      playComputer()
+    }
+  }, [turn])
+
   const updateBoard = (index) => {
-    // no actualizamos esta posición
-    // si ya tiene algo
     if (board[index] || winner) return
-    // actualizar el tablero
     const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard)
-    // cambiar el turno
-    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
-    setTurn(newTurn)
-    // guardar aqui partida
-    saveGameToStorage({
-      board: newBoard,
-      turn: newTurn
-    })
-    // revisar si hay ganador
+
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
       confetti()
       setWinner(newWinner)
+      return
     } else if (checkEndGame(newBoard)) {
       setWinner(false) // empate
+      return
     }
+
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn)
+    saveGameToStorage({
+      board: newBoard,
+      turn: newTurn
+    })
   }
   return (
     <main className={styles.board}>
@@ -69,6 +83,9 @@ export default function Board () {
       <Game board={board} updateBoard={updateBoard} />
       <TurnDisplay turn={turn} />
       <WinnerModal resetGame={resetGame} winner={winner} />
+      <Footer>
+        {players}
+      </Footer>
     </main>
   )
 }
