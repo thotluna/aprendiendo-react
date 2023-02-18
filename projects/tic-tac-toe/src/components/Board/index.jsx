@@ -1,4 +1,4 @@
-import { Children, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import confetti from 'canvas-confetti'
 
 import { TURNS } from '../../constants'
@@ -12,14 +12,11 @@ import Button from '../Button/index.jsx'
 import styles from './Board.module.css'
 import { usePlay } from '../../hooks/usePlay'
 import Footer from '../Footer'
+import { useBoard } from '../../hooks/useBoard'
 
 export default function Board ({ players }) {
   const { restartPlay } = usePlay()
-  const [board, setBoard] = useState(() => {
-    const boardFromStorage = window.localStorage.getItem('board')
-    if (boardFromStorage) return JSON.parse(boardFromStorage)
-    return Array(9).fill(null)
-  })
+  const { board, resetBoard, updateBoard } = useBoard()
 
   const [turn, setTurn] = useState(() => {
     const turnFromStorage = window.localStorage.getItem('turn')
@@ -30,11 +27,12 @@ export default function Board ({ players }) {
   const [winner, setWinner] = useState(null)
 
   const resetGame = () => {
-    setBoard(Array(9).fill(null))
+    // setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
     restartPlay()
 
+    resetBoard()
     resetGameStorage()
   }
 
@@ -44,7 +42,7 @@ export default function Board ({ players }) {
       index = Math.trunc(Math.random() * board.length)
     } while (board[index] !== null)
 
-    updateBoard(index)
+    move(index)
   }
 
   useEffect(() => {
@@ -53,11 +51,9 @@ export default function Board ({ players }) {
     }
   }, [turn])
 
-  const updateBoard = (index) => {
+  const move = (index) => {
     if (board[index] || winner) return
-    const newBoard = [...board]
-    newBoard[index] = turn
-    setBoard(newBoard)
+    const newBoard = updateBoard(index, turn)
 
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
@@ -80,7 +76,7 @@ export default function Board ({ players }) {
     <main className={styles.board}>
       <h1>Tic tac toe</h1>
       <Button onClick={resetGame}>Reset del juego</Button>
-      <Game board={board} updateBoard={updateBoard} />
+      <Game board={board} updateBoard={move} />
       <TurnDisplay turn={turn} />
       <WinnerModal resetGame={resetGame} winner={winner} />
       <Footer>

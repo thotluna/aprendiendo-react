@@ -20,3 +20,15 @@ export const getPlayStorage = () => {
 export const resetPlayStorage = () => {
   window.localStorage.removeItem('play')
 }
+
+export const getBoardStorage = () => {
+  return window.localStorage.getItem('board')
+}
+
+export const saveBoardStorage = () => {
+  window.localStorage.setItem('board', JSON.stringify(board))
+}
+
+export const resetBoardStorage = () => {
+  window.localStorage.removeItem('board')
+}
