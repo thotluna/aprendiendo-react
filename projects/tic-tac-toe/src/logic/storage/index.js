@@ -23,6 +23,23 @@ export const resetPlayersStorage = () => {
   window.localStorage.removeItem('players')
 }
 
+export const getScoreStorage = () => {
+  return window.localStorage.getItem('score')
+}
+
+export const getIsValuedScoreStorage = () => {
+  return window.localStorage.getItem('isValued')
+}
+
+export const saveScoreStorage = (score) => {
+  window.localStorage.setItem('score', JSON.stringify(score))
+  window.localStorage.setItem('isValued', true)
+}
+
+export const resetScoreStorage = () => {
+  window.localStorage.removeItem('score')
+}
+
 export const getBoardStorage = () => {
   return window.localStorage.getItem('board')
 }
