@@ -29,7 +29,6 @@ export function useBoard () {
     const newWinner = checkWinnerFrom(board)
     if (newWinner) setWinner(newWinner)
     if (hasBoardFull() && newWinner === null) setWinner(false)
-    console.log({ winner, newWinner })
   }
 
   const hasBoardFull = () => {
