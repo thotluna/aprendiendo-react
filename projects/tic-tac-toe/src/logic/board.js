@@ -1,6 +1,7 @@
 import { WINNER_COMBOS } from '../constants.js'
 
 export const checkWinnerFrom = (boardToCheck) => {
+  if (!Array.isArray(boardToCheck) || boardToCheck.length !== 9) return null
   // revisamos todas las combinaciones ganadoras
   // para ver si X u O ganó
   for (const combo of WINNER_COMBOS) {
