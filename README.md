@@ -13,4 +13,4 @@ En este curso se encuentra los ejercicios que he realizado aprendiendo React con
 ## ⌨️ Proyectos
 
 - 01: [Twitter Follow Card](projects/twitter-follow-card/)
-
+- 02: [Tic tac toe](projects/tic-tac-toe/)
