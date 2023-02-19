@@ -1,13 +1,3 @@
-export const saveGameToStorage = ({ board, turn }) => {
-  // guardar aqui partida
-  window.localStorage.setItem('board', JSON.stringify(board))
-  window.localStorage.setItem('turn', turn)
-}
-
-export const resetGameStorage = () => {
-  window.localStorage.removeItem('board')
-  window.localStorage.removeItem('turn')
-}
 
 export const savePlayStorage = () => {
   window.localStorage.setItem('play', true)
@@ -19,6 +9,18 @@ export const getPlayStorage = () => {
 
 export const resetPlayStorage = () => {
   window.localStorage.removeItem('play')
+}
+
+export const getPlayersStorage = () => {
+  return window.localStorage.getItem('players')
+}
+
+export const savePlayersStorage = (players) => {
+  window.localStorage.setItem('players', JSON.stringify(players))
+}
+
+export const resetPlayersStorage = () => {
+  window.localStorage.removeItem('players')
 }
 
 export const getBoardStorage = () => {
