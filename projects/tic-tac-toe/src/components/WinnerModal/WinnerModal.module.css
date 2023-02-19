@@ -10,7 +10,7 @@
 }
 
 .text {
-  background: #111;
+  background: rgba(1, 1, 1, 0.7);;
   height: 300px;
   width: 320px;
   border: 2px solid #eee;
