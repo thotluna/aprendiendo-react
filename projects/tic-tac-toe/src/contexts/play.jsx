@@ -5,7 +5,6 @@ export const PlayContext = createContext()
 
 export function PlayProvider ({ children }) {
   const [play, setPlay] = useState(() => getPlayStorage() || false)
-  console.log({ play })
   return (
     <PlayContext.Provider value={{
       play,
