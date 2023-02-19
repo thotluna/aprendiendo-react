@@ -1,6 +1,6 @@
 import styles from './Footer.module.css'
 
-export default function Footer ({ children }) {
+export function Footer ({ children }) {
   return (
     <footer className={styles.footer}>
       {children}
