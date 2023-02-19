@@ -1,69 +1,15 @@
-import { useEffect } from 'react'
-import confetti from 'canvas-confetti'
-
 import { WinnerModal } from '../WinnerModal'
-import { resetGameStorage } from '../../logic/storage/index.js'
-import TurnDisplay from '../TurnDisplay'
-import Game from '../Game'
-import Button from '../Button/index.jsx'
+import { TurnDisplay } from '../TurnDisplay'
+import { Game } from '../Game'
+import { Footer } from '../Footer'
+import Button from '../Button'
+
+import { useGame } from '../../hooks/useGame.js'
 
 import styles from './Board.module.css'
-import { usePlay } from '../../hooks/usePlay'
-import Footer from '../Footer'
-import { useBoard } from '../../hooks/useBoard'
-import { useTurn } from '../../hooks/useTurn'
 
 export default function Board ({ players }) {
-  const { restartPlay } = usePlay()
-  const { board, winner, resetBoard, updateBoard, hasBoardFull } = useBoard()
-  const { turn, changeTurn, resetTurn } = useTurn()
-
-  const resetGame = () => {
-    restartPlay()
-    resetBoard()
-    resetTurn()
-    resetGameStorage()
-  }
-
-  const playComputer = () => {
-    let index
-    do {
-      index = Math.trunc(Math.random() * board.length)
-    } while (board[index] !== null)
-
-    move(index)
-  }
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (!players.includes(turn) && winner === null && !hasBoardFull()) {
-        playComputer()
-      }
-    }, 500)
-    return () => clearTimeout(timeout)
-  }, [turn])
-
-  useEffect(() => {
-    if (winner) confetti()
-    console.log({ winner })
-  }, [winner])
-
-  const move = (index) => {
-    if (board[index] || winner) return
-    updateBoard(index, turn)
-
-    // const newWinner = checkWinnerFrom(newBoard)
-    // if (newWinner) {
-    //   confetti()
-    //   setWinner(newWinner)
-    //   return
-    // } else if (checkEndGame(newBoard)) {
-    //   setWinner(false) // empate
-    //   return
-    // }
-
-    changeTurn()
-  }
+  const { board, turn, winner, resetGame, move } = useGame({ players })
   return (
     <main className={styles.board}>
       <h1>Tic tac toe</h1>
