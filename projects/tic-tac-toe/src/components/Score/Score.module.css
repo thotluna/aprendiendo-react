@@ -1,0 +1,17 @@
+.content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-x{
+  display: flex;
+  flex-direction: row;
+}
+
+.player-o{
+  display: flex;
+  flex-direction: row-reverse;
+}
+

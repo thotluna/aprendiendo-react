@@ -13,3 +13,10 @@ export const WINNER_COMBOS = [
   [0, 4, 8],
   [2, 4, 6]
 ]
+
+export const INITIAL_SCORE = () => {
+  const initial = {}
+  initial[TURNS.X] = 0
+  initial[TURNS.O] = 0
+  return initial
+}

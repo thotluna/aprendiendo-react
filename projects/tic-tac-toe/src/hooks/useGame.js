@@ -5,9 +5,11 @@ import { useBoard } from './useBoard.js'
 import { useTurn } from './useTurn.js'
 
 import confetti from 'canvas-confetti'
+import { useScore } from './useScore.js'
 
 export function useGame ({ players }) {
   const { restartPlay } = usePlay()
+  const { score, updateScore, resetScore, setValue } = useScore()
   const { board, winner, resetBoard, updateBoard, hasBoardFull } = useBoard()
   const { turn, changeTurn, resetTurn } = useTurn()
 
@@ -15,6 +17,12 @@ export function useGame ({ players }) {
     restartPlay()
     resetBoard()
     resetTurn()
+    setValue(false)
+  }
+
+  const resetAll = () => {
+    resetScore()
+    resetGame()
   }
 
   const playComputer = () => {
@@ -36,8 +44,10 @@ export function useGame ({ players }) {
   }, [turn])
 
   useEffect(() => {
-    if (winner) confetti()
-    console.log({ winner })
+    if (winner) {
+      confetti()
+      updateScore(winner)
+    }
   }, [winner])
 
   const move = (index) => {
@@ -46,5 +56,5 @@ export function useGame ({ players }) {
     changeTurn()
   }
 
-  return { board, turn, winner, resetGame, move }
+  return { board, turn, winner, score, resetGame, resetAll, move }
 }
