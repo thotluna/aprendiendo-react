@@ -2,7 +2,7 @@ import { Square } from '../Square'
 
 import styles from './Game.module.css'
 
-export default function Game ({ board, updateBoard }) {
+export function Game ({ board, updateBoard }) {
   return (
     <section className={styles.game}>
       {
